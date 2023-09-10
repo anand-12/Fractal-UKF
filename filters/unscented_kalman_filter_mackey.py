@@ -1,7 +1,8 @@
 import numpy as np
 from test_funcs.mackey_glass import mackey_glass
 
-def unscented_kalman_filter(y, beta, gamma, tao, n, Q, R, x_init, P_init):
+
+def unscented_kalman_filter_mackey(y, beta, gamma, tao, n, Q, R, x_init, P_init):
     # Number of state variables
     n_states = len(x_init)
 
@@ -44,15 +45,20 @@ def unscented_kalman_filter(y, beta, gamma, tao, n, Q, R, x_init, P_init):
         for i in range(2 * n_states + 1):
             x_pred += W_m[i] * mackey_glass(sigma_points[i], beta, gamma, tao, n)
 
+
         P_pred = np.zeros((n_states, n_states))
         for i in range(2 * n_states + 1):
             err = mackey_glass(sigma_points[i], beta, gamma, tao, n) - x_pred
+
             P_pred += W_c[i] * np.outer(err, err)
 
         P_pred += Q
 
         # Update step
         K = P_pred @ np.linalg.inv(P_pred + R)
+        # print("x_pred type and shape:", type(x_pred), x_pred.shape)
+        # print("K type and shape:", type(K), K.shape)
+        # print("measurement type", type(measurement))
         x_hat = x_pred + K @ (measurement - x_pred)
         P = P_pred - K @ P_pred
 

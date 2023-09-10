@@ -4,7 +4,8 @@ from hurst import compute_Hc
 import fbm, hurst, pywt
 
 from test_funcs.mackey_glass import mackey_glass
-from filters.unscented_kalman_filter import unscented_kalman_filter
+from test_funcs.fBm import generate_fBm
+from filters.unscented_kalman_filter_mackey import unscented_kalman_filter
 from utils import get_hurst_exp, modify_state_to_match_hurst
 
 
@@ -13,7 +14,7 @@ t_min = 18
 t_max = 1100
 beta = 0.2
 gamma = 0.1
-tao = 30
+tao = 18
 n = 10
 
 
@@ -25,6 +26,7 @@ measurements = [true_state[0] + np.random.normal(0, measurement_noise_std)]
 for t in range(t_min + 1, t_max + 1):
     if t <= t_max:  
         true_state.append(mackey_glass(true_state, beta, gamma, tao, n))
+        # true_state.append(generate_fBm(length = 1024, hurst_exponent=0.7))
     measurements.append(true_state[-1] + np.random.normal(0, measurement_noise_std))
 
 
