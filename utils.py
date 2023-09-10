@@ -70,7 +70,7 @@ def modify_state_to_match_hurst(estimated_state, true_state, estimated_hurst, hu
             break
         modified_state = fractional_difference(estimated_state, d)/3
         modified_hurst = get_hurst_exp(modified_state, plotting = False)
-        d -= 0.1 * (modified_hurst - hurst_true)  # Adjust d to approach hurst_true
+        d -= 0.1 * (modified_hurst - hurst_true)  # Adjust dd
 
     return modified_state
 

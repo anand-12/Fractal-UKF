@@ -15,8 +15,7 @@ from test_funcs.mackey_glass import mackey_glass
 from test_funcs.fBm import generate_fBm
 
 
-
-# Mackey equations parameters
+# params for mackey
 t_min = 18
 t_max = 1100
 beta = 0.2
@@ -25,7 +24,7 @@ tao = 18
 n = 10
 
 hurst_exponent = 0.7
-series_name = "mackey"
+series_name = "fbm"
 np.random.seed(42)
 true_state = [1.2]
 measurement_noise_std = 0.1

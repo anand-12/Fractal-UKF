@@ -2,14 +2,14 @@ import numpy as np
 from test_funcs.fBm import generate_fBm
 
 def unscented_kalman_filter_fbm(y, hurst_exponent, Q, R, x_init, P_init):
-    # Number of state variables
+
     n_states = len(x_init)
 
-    # Initialize state estimate and covariance
+
     x_hat = x_init
     P = P_init
 
-    # UKF parameters
+    beta = 0.2
     alpha = 0.001  # Tuning parameter
     kappa = 0.1   # Tuning parameter
 
