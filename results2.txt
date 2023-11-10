@@ -1,0 +1,46 @@
+Mackey Tau = 17:
+
+Run 1
+Initial state is [1.649276750635504]
+True Hurst exponent
+H=0.1742, c=27.7064
+UKF estimation Hurst exponent
+H=0.5667, c=2.9309
+Starting fractional modification...
+Optimal q value is 2.8099999999999987 and the corresponding Hurst exponent is 0.24454388334591762
+SNR (dB): -0.05175861126065811
+Mean squared error between true state and UKF estimated state is 0.007621518538258407
+Mean squared error between true state and Fractal UKF estimated state is 0.018768482714955174
+Estimation variance between true state and UKF estimated state is 8.145600746588738e-05
+Estimation variance between true state and Fractal UKF estimated state is 0.004591849952993715
+
+Run 2
+Initial state is [1.1049323844786305]
+True Hurst exponent
+H=0.1274, c=23.1000
+UKF estimation Hurst exponent
+H=0.3390, c=5.9179
+Starting fractional modification...
+Optimal q value is 1.4599999999999995 and the corresponding Hurst exponent is 0.17158968732531135
+SNR (dB): -0.06664217403662995
+Mean squared error between true state and UKF estimated state is 0.00800391292508202
+Mean squared error between true state and Fractal UKF estimated state is 0.01218380213887171
+Estimation variance between true state and UKF estimated state is 8.440879551548845e-05
+Estimation variance between true state and Fractal UKF estimated state is 0.00037808929313482627
+
+Run 3
+Initial state is [1.2383299338079832]
+True Hurst exponent
+H=0.1134, c=25.8095
+UKF estimation Hurst exponent
+H=0.3288, c=6.7511
+Starting fractional modification...
+Optimal q value is 1.6599999999999993 and the corresponding Hurst exponent is 0.1402174757627472
+SNR (dB): -0.07096938899751455
+Mean squared error between true state and UKF estimated state is 0.007795222828643334
+Mean squared error between true state and Fractal UKF estimated state is 0.012739036378627612
+Estimation variance between true state and UKF estimated state is 7.706748064293932e-05
+Estimation variance between true state and Fractal UKF estimated state is 0.0006634889612619886
+
+
+
