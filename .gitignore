@@ -1,4 +1,4 @@
-*.json
+*plot_values.json
 /Only_mackey
 /Figures
 *.txt

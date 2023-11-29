@@ -117,8 +117,7 @@ def plot_results(t_min, t_max, true_state, measurements, estimated_state, adjust
 
     error_estimated = (np.array(true_state) - np.array(estimated_state))**2
     error_adjusted = (np.array(true_state) - np.array(adjusted_state))**2 # FOR MSE
-    # error_estimated = (np.array(true_state) - np.array(estimated_state)) # FOR SE
-    # error_adjusted = (np.array(true_state) - np.array(adjusted_state))
+
     var_estimated = np.var(error_estimated, ddof=1)
     var_adjusted = np.var(error_adjusted, ddof=1)
 
@@ -133,7 +132,7 @@ def plot_results(t_min, t_max, true_state, measurements, estimated_state, adjust
     ukf_variances.append(var_estimated)
     frac_ukf_variances.append(var_adjusted)
 
-    #Uncomment below lines for the plots
+    # Uncomment below lines for the plot for error vs time. Use only when num_runs = 1
     # plt.figure(figsize=(12, 8))
     # plt.plot(time, true_state, label='True State', linestyle='--')
     # plt.plot(time, measurements, label='Noisy Measurements', marker='o', linestyle='None', markersize=4)
@@ -155,7 +154,7 @@ def main():
     global_H_trace = []
     frac_q_list, frac_H_list, UKF_H_list, true_H_list = [], [], [], []
     frac_true_diff, ukf_true_diff = [], []
-    num_runs = 50
+    num_runs = 10
     series_name = parse_args()
 
     config = load_config()
@@ -180,8 +179,8 @@ def main():
         optimal_q, H_trace, optimal_H, UKF_H = adjust_state_with_optimal_q(true_state, estimated_state, params['q_min'], params['q_max'], params['N'], general_config["plotting_val"], H_true)
 
         adjusted_state = [i for i in fractional_derivative(estimated_state, optimal_q, params['N'])]
-        # adjusted_state = [i for i in fractional_derivative(true_state, optimal_q, params['N'])]
         adjusted_state = [i*(np.mean(estimated_state)/np.mean(adjusted_state)) for i in adjusted_state]
+        # adjusted_state = [i for i in fractional_derivative(true_state, optimal_q, params['N'])]
         # adjusted_state = [i*(np.mean(true_state)/np.mean(adjusted_state)) for i in adjusted_state]
         plot_results(params['t_min'], params['t_max'], true_state, measurements, estimated_state, adjusted_state)
         global_H_trace.append(H_trace)
@@ -191,9 +190,32 @@ def main():
         true_H_list.append(H_true)
         
         print(f'Time taken: {time.time() - s} seconds')
+
     frac_true_diff, ukf_true_diff = [abs(i-j) for i, j in zip(true_H_list, frac_H_list)], [abs(i-j) for i, j in zip(true_H_list, UKF_H_list)]
-    # Uncomment line below if you want to see the plot for Hurst vs q for 5 random realizations of any function
+
+    print(f'In {num_runs} iterations, average UKF MSE is {np.mean(ukf_errors)} and average Fractional UKF MSE is {np.mean(frac_ukf_errors)}')
+    print(f'The average difference between true hurst and UKF hurst is {np.mean(ukf_true_diff)} and average difference between true hurst and Fractional UKF hurst is {np.mean(frac_true_diff)}')
+    res = wilcoxon(ukf_true_diff, frac_true_diff)
+    print(f"Result of Wilcoxon test {res}")
+
+    # Interpret the result of the test
+    alpha = 0.01
+    if res[1] > alpha:
+        print('Same distribution (fail to reject H0)')
+    else:
+        print('Different distribution (reject H0)')
+
     
+
+
+    # print(f"Mean of UKF's Hurst exponent is {np.mean(UKF_H_list)} and variance is {np.var(UKF_H_list)}")
+    # print(f"Mean of Fractal UKF's exponent is  is {np.mean(frac_H_list)} and variance is {np.var(frac_H_list)}")
+    # print(f"Number of entries is {len(UKF_H_list)}")
+
+
+    # Deprecated code for plotting and saving values
+
+    # Uncomment line below if you want to see the plot for Hurst vs q for 5 random realizations of a function
     # plot_trace(global_H_trace, frac_q_list, frac_H_list, true_H_list, params['q_min'], params['q_max'])
 
 
@@ -207,20 +229,6 @@ def main():
     
     # with open('plot_values.json', 'a') as f:
     #     json.dump(d, f)
-
-
-    print(f'In {num_runs} iterations, average UKF MSE is {np.mean(ukf_errors)} and average Fractional UKF MSE is {np.mean(frac_ukf_errors)}')
-    print(f'The average difference between true hurst and UKF hurst is {np.mean(ukf_true_diff)} and average difference between true hurst and Fractional UKF hurst is {np.mean(frac_true_diff)}')
-    # df = pd.DataFrame([UKF_H_list, frac_H_list])
-    res = wilcoxon(ukf_true_diff, frac_true_diff, alternative='greater')
-    print(f"Result of Wilcoxon test {res}")
-
-    print(len(ukf_true_diff))
-
-    # print(f"Mean of UKF's Hurst exponent is {np.mean(UKF_H_list)} and variance is {np.var(UKF_H_list)}")
-    # print(f"Mean of Fractal UKF's exponent is  is {np.mean(frac_H_list)} and variance is {np.var(frac_H_list)}")
-    # print(f"Number of entries is {len(UKF_H_list)}")
-
 
 
 if __name__ == '__main__':

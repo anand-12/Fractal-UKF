@@ -114,6 +114,7 @@ def fractional_derivative(data, q, N):
         for j in range(N):
             if t-j < 0: 
                 continue
+            # print(j, q, gamma_function(j-q), gamma_function(j+1), gamma_function(-q))
             coeff = (-1)**j * gamma_function(j-q) / (gamma_function(j+1) * gamma_function(-q))
             # coeff = (-1)**j * gamma_function(j-q+1) / (gamma_function(j+1) * gamma_function(-q))
 

@@ -134,20 +134,20 @@ def plot_trace(H_lol, optimal_q_list, optimal_H_list, true_list, q_min, q_max):
  
     arr1, arr2, arr3, arr4, arr5 = H_lol[0], H_lol[1], H_lol[2], H_lol[3], H_lol[4]
     optimal_points = {
-    'Mackey:tau = 17,  1': (optimal_q_list[0], optimal_H_list[0]),
-    'Mackey:tau = 17, 2': (optimal_q_list[1], optimal_H_list[1]),
-    'Mackey:tau = 17, 3': (optimal_q_list[2], optimal_H_list[2]),
-    'Mackey:tau = 17, 4': (optimal_q_list[3], optimal_H_list[3]),
-    'Mackey:tau = 17, 5': (optimal_q_list[4], optimal_H_list[4])
+    'Tentmap:mu = 1.99, Realization 1': (optimal_q_list[0], optimal_H_list[0]),
+    'Tentmap:mu = 1.99, Realization 2': (optimal_q_list[1], optimal_H_list[1]),
+    'Tentmap:mu = 1.99, Realization 3': (optimal_q_list[2], optimal_H_list[2]),
+    'Tentmap:mu = 1.99, Realization 4': (optimal_q_list[3], optimal_H_list[3]),
+    'Tentmap:mu = 1.99, Realization 5': (optimal_q_list[4], optimal_H_list[4])
 
     }
 
     true_hurst_points = {
-        'Mackey: tau = 17, 1': [true_list[0], '#1f77b4'],
-        'Mackey: tau = 17, 2': [true_list[1], '#ff7f0e'],
-        'Mackey: tau = 17, 3': [true_list[2], '#2ca02c'],
-        'Mackey: tau = 17, 4': [true_list[3], '#d62728'],
-        'Mackey: tau = 17, 5': [true_list[4], '#9467bd']
+        'Tentmap:mu = 1.99, Realization 1': [true_list[0], '#1f77b4'],
+        'Tentmap:mu = 1.99, Realization 2': [true_list[1], '#ff7f0e'],
+        'Tentmap:mu = 1.99, Realization 3': [true_list[2], '#2ca02c'],
+        'Tentmap:mu = 1.99, Realization 4': [true_list[3], '#d62728'],
+        'Tentmap:mu = 1.99, Realization 5': [true_list[4], '#9467bd']
     }
 
     # Create a common q_values array
@@ -167,11 +167,11 @@ def plot_trace(H_lol, optimal_q_list, optimal_H_list, true_list, q_min, q_max):
 
 
     plots = [
-        (q_values_common, arr1_adapt, 'Mackey:tau = 17, 1', '-', 'o'),
-        (q_values_common, arr2_adapt, 'Mackey:tau = 17, 2', '-', 's'),
-        (q_values_common, arr3_adapt, 'Mackey:tau = 17, 3', '-', '^'),
-        (q_values_common, arr4_adapt, 'Mackey:tau = 17, 4', ':', 'x'),
-        (q_values_common, arr5_adapt, 'Mackey:tau = 17, 5', ':', '+'),
+        (q_values_common, arr1_adapt, 'Tentmap:mu = 1.99, Realization 1', '-', 'o'),
+        (q_values_common, arr2_adapt, 'Tentmap:mu = 1.99, Realization 2', '-', 's'),
+        (q_values_common, arr3_adapt, 'Tentmap:mu = 1.99, Realization 3', '-', '^'),
+        (q_values_common, arr4_adapt, 'Tentmap:mu = 1.99, Realization 4', ':', 'x'),
+        (q_values_common, arr5_adapt, 'Tentmap:mu = 1.99, Realization 5', ':', '+'),
     ]
 
     # Store colors to use for optimal values later
