@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
-from test_funcs.functions import mackey_glass, generate_fBm, logistic_map
-from filters.filters import unscented_kalman_filter_mackey, unscented_kalman_filter_fbm, unscented_kalman_filter_logistic
+from functions import mackey_glass, generate_fBm, logistic_map
+from filters import unscented_kalman_filter_mackey, unscented_kalman_filter_fbm, unscented_kalman_filter_logistic
 from utils import get_hurst_exp, fractional_derivative
 import json
 
